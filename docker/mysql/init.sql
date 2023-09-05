@@ -4,7 +4,7 @@ CREATE DATABASE posts;
 USE posts;
 
 DROP table IF EXISTS users;
-CREATE TABLE users (
+CREATE TABLE users(
   id INT AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   kisei FLOAT NULL,
@@ -14,8 +14,7 @@ CREATE TABLE users (
   mail VARCHAR(255) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  is_valid boolean default true 
-  -- 論理削除用
+  is_valid boolean default true
 ) CHARSET=utf8;
 
 insert into users(name, kisei, tate, yoko, birthday, mail) values 
@@ -31,7 +30,7 @@ CREATE TABLE good_new(
   post VARCHAR(255) NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  exist int default true,
+  exist int default true
 ) CHARSET=utf8;
 
 insert into good_new(user_id, post) values
