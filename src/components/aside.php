@@ -20,7 +20,7 @@
         </a>
       </li>
       <li class="relative px-6 py-3">
-        <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800" href="#">
+        <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800" href="http://localhost:8080/admin/users/users.php">
           <span class="ml-4">ユーザー一覧</span>
         </a>
       </li>
