@@ -14,10 +14,9 @@ $posts = $pdo->query($sql)->fetchAll();
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="#" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="../vendor/tailwind/tailwind.output.css" rel="stylesheet">
-  <title>管理者画面</title>
+  <title>GOOD&NEW一覧</title>
 </head>
 
 <body>
