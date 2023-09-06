@@ -4,10 +4,10 @@ require_once(dirname(__FILE__) . '/../../dbconnect.php');
 
 $id = $_REQUEST['id'];
 $sql = "SELECT * FROM good_new WHERE id = :id";
-$stmt = $pdo -> prepare($sql);
-$stmt -> bindValue(':id', $id);
-$stmt -> execute();
-$post = $stmt -> fetch(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare($sql);
+$stmt->bindValue(':id', $id);
+$stmt->execute();
+$post = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -35,7 +35,7 @@ $post = $stmt -> fetch(PDO::FETCH_ASSOC);
           <h2 class="my-6 text-2xl font-semibold text-gray-700 ">good&new共有アプリ</h2>
           <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <h2 class="my-6 text-2xl font-semibold text-gray-700 ">good&new編集</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="http://localhost:8080/services/update_post.php" method="POST" enctype="multipart/form-data">
               <div class="my-8 flex justify-center">
                 <table class="w-full mx-8 max-w-4xl bg-white shadow-md rounded-lg overflow-hidden">
                   <thead class="bg-blue-500 text-white">
@@ -56,13 +56,13 @@ $post = $stmt -> fetch(PDO::FETCH_ASSOC);
                         </div>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap">
-                        <input type="text" name="post" required class="required" 
-                        value="<?= $post["post"] ?>">
+                        <input type="text" name="post" required class="required" value="<?= $post["post"] ?>">
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <input type="hidden" name="id" value="<?= $post["id"] ?>">
               <div class="btn_wrapper">
                 <button type="submit" class="btn submit  update_btn">更新</button>
               </div>
