@@ -16,6 +16,7 @@ $posts = $pdo->query($sql)->fetchAll();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link href="../vendor/tailwind/tailwind.output.css" rel="stylesheet">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" defer></script>
   <title>GOOD&NEW一覧</title>
 </head>
 
@@ -42,7 +43,7 @@ $posts = $pdo->query($sql)->fetchAll();
                 </thead>
                 <tbody class="bg-white divide-y">
                   <?php foreach ($posts as $key => $post) { ?>
-                    <tr class="text-gray-700">
+                    <tr class="text-gray-700" data-id=<?= $post["id"] ?>>
                       <td class="px-4 py-3">
                         <p class="font-semibold items-center text-sm"><?= $post["name"] ?></p>
                       </td>
@@ -57,10 +58,8 @@ $posts = $pdo->query($sql)->fetchAll();
                           <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-blue-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Edit" data=<?= $post["id"] ?>>
                             <a href="http://localhost:8080/admin/posts/edit.php?id=<?= $post["id"] ?>">編集</a>
                           </button>
-                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" 
-                          data-id=<?= $post["id"] ?>
-                          onclick="deletePost(this)">
-                            削除
+                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" onclick="deletePost(this)">
+                            <a href="http://localhost:8080/services/delete_post.php?id=<?= $post["id"] ?>">削除</a>
                           </button>
                         </div>
                       </td>
@@ -80,17 +79,16 @@ $posts = $pdo->query($sql)->fetchAll();
   function deletePost(button) {
     const tr = $(button).closest('tr');
     const id = tr.attr('data-id');
-
     if (confirm('本当に削除しますか？')) {
       $.ajax({
-        url: 'http://localhost:8080/admin/delete.php',
+        url: `http://localhost:8080/services/delete_post.php`,
         type: 'POST',
         data: {
           id: id
         },
         success: function(data) {
           console.log(data);
-          tr.addClass('hidden');
+          // tr.addClass('hidden');
         },
         error: function(xhr) {
           console.error(xhr);

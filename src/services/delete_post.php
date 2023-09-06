@@ -10,8 +10,7 @@ try{
   $stmt->execute();
   $pdo->commit();
   // Headerで状態のリダイレクトを返す⇒それを受け取って、index.phpで非同期処理
-  header("HTTP/1.1 204 OK");
+  header("Location: "."http://localhost:8080/admin/index.php");
 } catch (PDOException $e) {
   $pdo->rollBack();
-  header("HTTP/1.1 500 OK");
 }
