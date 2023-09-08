@@ -30,10 +30,13 @@
           <label>よこもく：<input type="text" name="yoko" required></label>
       </div>
       <div>
-          <label>誕生日：<input type="text" name="birthday" required></label>
+          <label>誕生日：<input type="date" name="birthday" required></label>
       </div>
       <div>
-          <label>メールアドレス：<input type="text" name="mail" required></label>
+          <label>メールアドレス：<input type="mail" name="mail" required></label>
+      </div>
+      <div>
+          <label>パスワード:<input type="password" name="pass" required></label>
       </div>
       <input type="submit" value="新規登録">
     </form>

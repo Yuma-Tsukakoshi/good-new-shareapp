@@ -7,22 +7,24 @@ $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //PASSWORD_DEFAULT:bcrypt アルゴリズムを用いてパスワードをハッシュ化する
 
 //フォームに入力されたmailがすでに登録されていないかチェック
-$sql = "SELECT * FROM users WHERE email = :email";
+$sql = "SELECT * FROM users WHERE mail = :mail";
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email',$_POST['email']);
+$stmt->bindValue(':mail',$_POST['mail']);
 $stmt->execute();
 $member = $stmt->fetch();
-if ($member['email'] === $_POST['email']) {
+if ($member['mail'] === $_POST['mail']) {
     $msg = '同じメールアドレスが存在します。';
-    $link = '<a href="./signup.php">戻る</a>';
+    $link = '<a href="http://localhost:8080/admin/auth/signup.php">戻る</a>';
 } else {
     //登録されていなければinsert 
-    $sql = "INSERT INTO users(name, email, password) VALUES (:name, :email, :password)";
+    $sql = "INSERT INTO users(name, kisei, tate,yoko,birthday,mail) VALUES (:name, :kisei, :tate, :yoko, :birthday, :mail)";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', $_POST['name']);
-    $stmt->bindValue(':email',$_POST['email']);
-    $stmt->bindValue(':password', $pass);
-    $stmt->execute();
+    $params = [
+        ':name' => $name, 
+        ':kisei' => $_POST['kisei'], ':tate' => $_POST['tate'], 
+        ':yoko' => $_POST['yoko'], ':birthday' => $_POST['birthday'], ':mail' => $_POST['mail']
+    ];
+    $stmt->execute($params);
     $msg = '登録が完了しました';
     $link = '<a href="http://localhost:8080/admin/auth/login_form.php">ログインページへ</a>';
 }

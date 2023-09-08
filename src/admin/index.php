@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION["id"]) || !isset($_SESSION["name"])) {
+  header("Location: http://localhost:8080/admin/auth/login_form.php");
+  exit();
+}
 
 require_once(dirname(__FILE__) . '/../dbconnect.php');
 
