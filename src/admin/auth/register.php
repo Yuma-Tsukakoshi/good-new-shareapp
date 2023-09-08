@@ -3,7 +3,7 @@
 require_once(dirname(__FILE__) . '/../../dbconnect.php');
 
 $name = $_POST['name'];
-$pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 //PASSWORD_DEFAULT:bcrypt アルゴリズムを用いてパスワードをハッシュ化する
 
 //フォームに入力されたmailがすでに登録されていないかチェック
@@ -25,6 +25,15 @@ if ($member['mail'] === $_POST['mail']) {
         ':yoko' => $_POST['yoko'], ':birthday' => $_POST['birthday'], ':mail' => $_POST['mail']
     ];
     $stmt->execute($params);
+
+    $sql = "INSERT INTO user_invitations(user_id, password) VALUES (:user_id, :password)";
+    $stmt = $pdo->prepare($sql);
+    $params = [
+        ':user_id' => $pdo->lastInsertId(), 
+        ':password' => $pass
+    ];
+    $stmt->execute($params);
+    
     $msg = '登録が完了しました';
     $link = '<a href="http://localhost:8080/admin/auth/login_form.php">ログインページへ</a>';
 }
