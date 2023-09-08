@@ -10,21 +10,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Plus+Jakarta+Sans:wght@400;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="../../assets/styles/common.css">
-  <link rel="stylesheet" href="./admin.css">
+  <link rel="stylesheet" href="../admin.css">
 </head>
 
 <body>
-  <header class="p-header">
-    <div class="p-header__logo"><img src="../../assets/img/logo.svg" alt="POSSE"></div>
-  </header>
   <main>
       <h1>ログインページ</h1>
       <form action="http://localhost:8080/admin/auth/signin.php" method="post">
         <div>
-            <label>メールアドレス：<input type="text" name="email" required></label>
+            <label>メールアドレス：<input type="text" name="mail" required></label>
         </div>
         <div>
-            <label>パスワード：<input type="password" name="password" required></label>
+            <label>パスワード：<input type="password" name="pass" required></label>
         </div>
         <input type="submit" value="ログイン">
     </form>

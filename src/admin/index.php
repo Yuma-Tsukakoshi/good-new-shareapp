@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["id"]) || !isset($_SESSION["name"])) {
+  header("Location: http://localhost:8080/admin/auth/signup.php");
+  exit();
+}
 
 require_once(dirname(__FILE__) . '/../dbconnect.php');
 
@@ -59,7 +65,8 @@ $posts = $pdo->query($sql)->fetchAll();
                             <a href="http://localhost:8080/admin/posts/edit.php?id=<?= $post["id"] ?>">編集</a>
                           </button>
                           <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" onclick="deletePost(this)">
-                            <a href="http://localhost:8080/services/delete_post.php?id=<?= $post["id"] ?>">削除</a>
+                            <!-- <a href="http://localhost:8080/services/delete_post.php?id=<?= $post["id"] ?>">削除</a> -->
+                            削除
                           </button>
                         </div>
                       </td>
@@ -78,7 +85,8 @@ $posts = $pdo->query($sql)->fetchAll();
 <script>
   function deletePost(button) {
     const tr = $(button).closest('tr');
-    const id = tr.attr('data-id');
+    var id = tr.attr('data-id');
+    console.log(id);
     if (confirm('本当に削除しますか？')) {
       $.ajax({
         url: `http://localhost:8080/services/delete_post.php`,
@@ -86,15 +94,17 @@ $posts = $pdo->query($sql)->fetchAll();
         data: {
           id: id
         },
+        // delete処理は、バックでは反映されてるがフロントはリロードしないと反映されない⇒非表示であればできる
         success: function(data) {
-          console.log(data);
-          // tr.addClass('hidden');
+          console.log("success");
+          tr.remove();
         },
         error: function(xhr) {
-          console.error(xhr);
+          console.error("error");
         }
       });
     }
+    
   }
 </script>
 
