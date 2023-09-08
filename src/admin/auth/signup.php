@@ -21,7 +21,7 @@
           <label>名前:<input type="text" name="name" required></label>
       </div>
       <div>
-          <label>期生：<input type="text" name="kisei" required></label>
+          <label>期生：<input type="number" step="0.5" name="kisei" required></label>
       </div>
       <div>
           <label>たてもく：<input type="text" name="tate" required></label>

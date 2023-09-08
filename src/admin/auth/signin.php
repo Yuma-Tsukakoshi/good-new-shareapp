@@ -6,9 +6,9 @@ require_once(dirname(__FILE__) . '/../../dbconnect.php');
 
 $mail = $_POST['mail'];
 
-$sql = "SELECT * FROM users WHERE mail = :mail";
+$sql = "SELECT * FROM users INNER JOIN user_invitations ON users.id = user_invitations.user_id WHERE mail = :mail";
 $stmt = $pdo->prepare($sql);
-$stmt->bindValue(':email', $mail);
+$stmt->bindValue(':mail', $mail);
 $stmt->execute();
 $member = $stmt->fetch();
 //指定したハッシュがパスワードにマッチしているかチェック

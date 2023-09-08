@@ -21,8 +21,11 @@ if ($member['mail'] === $_POST['mail']) {
     $stmt = $pdo->prepare($sql);
     $params = [
         ':name' => $name, 
-        ':kisei' => $_POST['kisei'], ':tate' => $_POST['tate'], 
-        ':yoko' => $_POST['yoko'], ':birthday' => $_POST['birthday'], ':mail' => $_POST['mail']
+        ':kisei' => $_POST['kisei'], 
+        ':tate' => $_POST['tate'], 
+        ':yoko' => $_POST['yoko'], 
+        ':birthday' => $_POST['birthday'], 
+        ':mail' => $_POST['mail']
     ];
     $stmt->execute($params);
 

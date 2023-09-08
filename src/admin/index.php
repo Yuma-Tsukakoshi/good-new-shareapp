@@ -1,6 +1,8 @@
 <?php
+session_start();
+
 if (!isset($_SESSION["id"]) || !isset($_SESSION["name"])) {
-  header("Location: http://localhost:8080/admin/auth/login_form.php");
+  header("Location: http://localhost:8080/admin/auth/signup.php");
   exit();
 }
 
