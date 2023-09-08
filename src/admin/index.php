@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["id"]) || !isset($_SESSION["name"])) {
-  header("Location: http://localhost:8080/admin/auth/signup.php");
-  exit();
-}
+// ログインしていない場合はログインページに遷移だけど、今は一旦コメントアウト
+// if (!isset($_SESSION["id"]) || !isset($_SESSION["name"])) {
+//   header("Location: http://localhost:8080/admin/auth/signup.php");
+//   exit();
+// }
 
 require_once(dirname(__FILE__) . '/../dbconnect.php');
 
