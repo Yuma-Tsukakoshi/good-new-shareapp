@@ -36,9 +36,26 @@ if ($member['mail'] === $_POST['mail']) {
         ':password' => $pass
     ];
     $stmt->execute($params);
-    
+
+
+    #メールの送信を行っている
     $msg = '登録が完了しました';
-    $link = '<a href="http://localhost:8080/admin/auth/login_form.php">ログインページへ</a>';
+    $link = '新規登録ユーザー充てにメールが送信されたので確認してください';
+
+    $to = $_POST['mail'];
+    $subject = "ユーザー新規登録ありがとうございます";
+    $message = "ご登録いただきありがとうございます。\n";
+    $message .= "こちらのログイン画面URLから管理者一覧をご確認ください。\n";
+    $message .= "http://localhost:8080/admin/auth/login_form.php\n";
+    $headers = "From: admin@mail.com";
+
+    $result = mail($to, $subject, $message, $headers);
+
+    if ($result) {
+        echo "メールが送信されました";
+    } else {
+        echo "メールの送信に失敗しました";
+    }
 }
 ?>
 
