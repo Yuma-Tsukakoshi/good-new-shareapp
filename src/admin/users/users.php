@@ -71,10 +71,10 @@ $users = $pdo->query($sql)->fetchAll();
                             <!-- <a href="?id=<?= $user["id"] ?>">編集</a> -->
                             編集
                           </button>
-                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" onclick="hidePost(this)">
+                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" onclick="deletePost(this)">
                             <!-- onclick="hidePost(this)" 上記に追加-->
                             <!-- ↑9/12追加した -->
-                            <!-- <a href="http://localhost:8080/admin/delete.php?id=<?= $user["id"] ?>">削除</a>
+                            <!-- <a href="http://localhost:8080/services/delete_user.php?id=<?= $user["id"] ?>">削除</a>
                           -->
                             削除
                           </button>
@@ -93,25 +93,24 @@ $users = $pdo->query($sql)->fetchAll();
 </body>
 
 <script>
-  function hidePost(button) {
+  function deletePost(button) {
     const tr = $(button).closest('tr');
-    const id = tr.attr('data-id');
-
+    var id = tr.attr('data-id');
+    console.log(id);
     if (confirm('本当に削除しますか？')) {
       $.ajax({
         // 以下のurlを変更
         url: 'http://localhost:8080/services/delete_user.php',
-        // typeはPOSTからGETに変更
-        type: 'GET',
+        type: 'POST',
         data: {
           id: id
         },
         success: function(data) {
-          console.log(data);
-          tr.addClass('hidden');
+          console.log("success");
+          tr.remove();
         },
         error: function(xhr) {
-          console.error(xhr);
+          console.error("error");
         }
       });
     }
