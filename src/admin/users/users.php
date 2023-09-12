@@ -45,7 +45,8 @@ $users = $pdo->query($sql)->fetchAll();
                 </thead>
                 <tbody class="bg-white divide-y">
                   <?php foreach ($users as $key => $user) { ?>
-                    <tr class="text-gray-700">
+                    <!-- data-idを追加 -->
+                    <tr class="text-gray-700" data-id=<?= $user["id"] ?>>
                       <td class="px-4 py-3">
                         <p class="font-semibold items-center text-sm"><?= $user["name"] ?></p>
                       </td>
@@ -70,8 +71,9 @@ $users = $pdo->query($sql)->fetchAll();
                             <!-- <a href="?id=<?= $user["id"] ?>">編集</a> -->
                             編集
                           </button>
-                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                          <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-gray-500 rounded-lg focus:outline-none focus:shadow-outline-gray" aria-label="Delete" onclick="hidePost(this)">
                             <!-- onclick="hidePost(this)" 上記に追加-->
+                            <!-- ↑9/12追加した -->
                             <!-- <a href="http://localhost:8080/admin/delete.php?id=<?= $user["id"] ?>">削除</a>
                           -->
                             削除
@@ -90,15 +92,17 @@ $users = $pdo->query($sql)->fetchAll();
   </div>
 </body>
 
-<!-- <script>
+<script>
   function hidePost(button) {
     const tr = $(button).closest('tr');
     const id = tr.attr('data-id');
 
     if (confirm('本当に削除しますか？')) {
       $.ajax({
-        url: 'http://localhost:8080/admin/delete.php',
-        type: 'POST',
+        // 以下のurlを変更
+        url: 'http://localhost:8080/services/delete_user.php',
+        // typeはPOSTからGETに変更
+        type: 'GET',
         data: {
           id: id
         },
@@ -112,6 +116,6 @@ $users = $pdo->query($sql)->fetchAll();
       });
     }
   }
-</script> -->
+</script>
 
 </html>
