@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../dbconnect.php');
 $pdo-> beginTransaction();
 
 try{
-    $sql = "UPDATE good_new SET exist = false WHERE id = :id";
+    $sql = "UPDATE users SET is_valid = 0 WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt -> bindValue(':id', $_POST['id']);
     $stmt->execute();
